@@ -7,7 +7,6 @@ function App() {
     const [deferredPrompt, setDeferredPrompt] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Configura IndexedDB
     const initializeDB = async () => {
         return openDB('RickAndMortyDB', 1, {
             upgrade(db) {
@@ -18,7 +17,6 @@ function App() {
         });
     };
 
-    // Guardar personajes en IndexedDB
     const saveCharactersToDB = useCallback(async (characters) => {
         const db = await initializeDB();
         const tx = db.transaction('characters', 'readwrite');
@@ -29,7 +27,6 @@ function App() {
         await tx.done;
     }, []);
 
-    // Obtener personajes de IndexedDB
     const getCharactersFromDB = useCallback(async () => {
         const db = await initializeDB();
         const tx = db.transaction('characters', 'readonly');
@@ -52,7 +49,7 @@ function App() {
                     const firstTenCharacters = data.results.slice(0, 10);
 
                     setCharacters(firstTenCharacters);
-                    await saveCharactersToDB(firstTenCharacters); // Guardar en IndexedDB
+                    await saveCharactersToDB(firstTenCharacters);
                 } catch (error) {
                     console.error('Error al obtener los personajes:', error);
                 }
@@ -61,18 +58,20 @@ function App() {
 
         fetchCharacters();
 
-        const handleBeforeInstallPrompt = (event) => {
-            event.preventDefault();
-            setDeferredPrompt(event);
-            console.log('Evento beforeinstallprompt capturado y deferredPrompt configurado.');
-        };
-
-        window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-
-        return () => {
-            window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-        };
     }, [getCharactersFromDB, saveCharactersToDB]);
+
+    useEffect(() => {
+        const handleBeforeInstallPrompt = (event) => {
+          event.preventDefault();
+          setDeferredPrompt(event);
+        };
+    
+        window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    
+        return () => {
+          window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+        };
+    }, []);
 
     const handleInstallClick = () => {
         if (deferredPrompt) {
@@ -116,10 +115,7 @@ function App() {
             {deferredPrompt && (
                 <div className="install-button max-w-md mx-auto mt-6 text-center">
                     <button
-                        onClick={() => {
-                            console.log('Botón de instalación clickeado');
-                            setIsModalOpen(true);
-                        }}
+                        onClick={() => setIsModalOpen(true)}
                         className="bg-green-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-green-600"
                     >
                         Instalar PWA
@@ -128,11 +124,11 @@ function App() {
             )}
 
             {isModalOpen && (
-                <div className="modal">
+                <div className="modal-overlay">
                     <div className="modal-content">
                         <h2>¿Quieres instalar la aplicación?</h2>
-                        <button onClick={() => handleInstallClick()}>Instalar app</button>
-                        <button onClick={() => setIsModalOpen(false)}>Cerrar</button>
+                        <button onClick={handleInstallClick} className="install-btn">Instalar app</button>
+                        <button onClick={() => setIsModalOpen(false)} className="close-btn">Cerrar</button>
                     </div>
                 </div>
             )}
