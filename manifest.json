@@ -1,0 +1,25 @@
+{
+  "short_name": "Mi App",
+  "name": "App Rick and Morty",
+  "icons": [
+    {
+      "src": "192.jpg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image"
+    },
+    {
+      "src": "192.jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "512.jpg",
+      "sizes": "512x512",
+      "type": "image"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000"
+}
