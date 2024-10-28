@@ -1,13 +1,110 @@
+/* Estilo de fondo y tipografía principal */
 body {
+  background-color: #0d0d0d; /* Fondo negro profundo */
+  color: #00ff88; /* Verde brillante para el texto */
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Contenedor principal para centrar y estilizar */
+.container {
+  max-width: 1200px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+  background: rgba(13, 13, 13, 0.95); /* Negro semi-transparente */
+}
+
+/* Estilo de las tarjetas de personajes */
+.card {
+  background: #1a1a1a; /* Gris oscuro */
+  border: 1px solid #00ff88;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 255, 136, 0.2);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+/* Estilo de imagen */
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Títulos y textos */
+h1, h2, h3, h5 {
+  color: #00ff88;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+/* Botón de instalación */
+.install-button button {
+  background-color: #00ff88;
+  color: #0d0d0d;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.install-button button:hover {
+  background-color: #00cc6a; /* Verde más oscuro */
+}
+
+/* Modal de instalación */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border: 1px solid #00ff88;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+  color: #00ff88;
+  text-align: center;
+}
+
+.modal button {
+  background-color: #00ff88;
+  color: #0d0d0d;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background-color: #00cc6a;
 }
